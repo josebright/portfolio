@@ -5,17 +5,20 @@ import styles from '@/styles/Home.module.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+
+  const profile: string = "Bright' Portfolio";
+
   return (
     <>
       <Head>
-        <title>Bright' Portfolio</title>
+        <title>{ profile }</title>
         <meta name="description" content="Uchenna Bright Ugwumadu" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <div className={styles.center}>
-          <h1>BRIGHT'S PORTFOLIO</h1>
+      <main>
+        <div>
+          <h1>{ profile }</h1>
         </div>
       </main>
     </>
