@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
+import styles from '../styles/Home.module.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -10,14 +10,14 @@ export default function Home() {
   const fName: string = "Uchenna";
 
   return (
-    <>
+    <div className={styles.body}>
       <Head>
         <title>{ profile }</title>
         <meta name="description" content="Uchenna Bright Ugwumadu" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
+      <main >
         <div>
           <h2>Hello,</h2>
           <h1>I'm { fName },</h1>
@@ -27,6 +27,6 @@ export default function Home() {
           </p>
         </div>
       </main>
-    </>
+    </div>
   )
 }
