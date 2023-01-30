@@ -6,7 +6,8 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
 
-  const profile: string = "Bright' Portfolio";
+  const profile: string = "Uchenna's Profile";
+  const fName: string = "Uchenna";
 
   return (
     <>
@@ -18,7 +19,12 @@ export default function Home() {
       </Head>
       <main>
         <div>
-          <h1>{ profile }</h1>
+          <h2>Hello,</h2>
+          <h1>I'm { fName },</h1>
+          <h2></h2>
+          <p>
+            
+          </p>
         </div>
       </main>
     </>
