@@ -5,6 +5,14 @@
     margin: 0;
   }
 
+  .primaryColor {
+    color: #64ff00;
+  };
+
+  .secondaryColor {
+    color: #64ff00;
+  };
+
   .error {
     color: white;
     background-color: red;
