@@ -1,11 +1,15 @@
 import Image from 'next/image'
+import Email from 'public/assests/svg/gmail.svg'
+import Linkedin from 'public/assests/svg/linkedin.svg'
+import Twitter from 'public/assests/svg/twitter.svg'
+import Github from 'public/assests/svg/github.svg'
 
 export default function Contact() {
     return (
         <>
             <div>
                 <Image
-                    src=" "
+                    src={Email}
                     alt="email"
                     width={500}
                     height={500}
@@ -13,7 +17,7 @@ export default function Contact() {
             </div>
             <div>
                 <Image
-                    src=" "
+                    src={Linkedin}
                     alt="linkedin"
                     width={500}
                     height={500}
@@ -21,7 +25,7 @@ export default function Contact() {
             </div>
             <div>
                 <Image
-                    src=" "
+                    src={Twitter}
                     alt="twitter"
                     width={500}
                     height={500}
@@ -29,7 +33,7 @@ export default function Contact() {
             </div>
             <div>
                 <Image
-                    src=" "
+                    src={Github}
                     alt="github"
                     width={500}
                     height={500}
