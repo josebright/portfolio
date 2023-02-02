@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Coinforbarter from 'public/assests/images/coinforbarter.png'
 
 export default function About() {
     const fName: string = "Uchenna";
@@ -19,9 +20,9 @@ export default function About() {
             </div>
             <div>
                 <Image
-                    src=" "
+                    src={Coinforbarter}
                     alt=""
-                    width={500}
+                    width={700}
                     height={500}
                 />
             </div>
