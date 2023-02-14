@@ -16,8 +16,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main >
-        <About />
+      <main>
+        <div className='grid grid-cols-2 divide-x w-screen h-screen'>
+          <div className='h-screen'>01</div>
+          <div className='h-screen'>02</div>
+        </div>
+        <div>
+          <About />
+        </div>
       </main>
     </div>
   )
