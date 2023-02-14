@@ -17,9 +17,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className='grid grid-cols-2 divide-x w-screen h-screen'>
-          <div className='h-screen'>01</div>
-          <div className='h-screen'>02</div>
+        <div className='grid grid-cols-2 divide-x w-screen h-screen relative'>
+          <div className='h-screen bg-[#8E347E]'>01</div>
+          <div className='h-screen bg-[#191919]'>02</div>
         </div>
         <div>
           <About />
