@@ -7,7 +7,7 @@ export default function About() {
     <div className='grid grid-cols-2 h-screen px-20 content-center'>
       <div>
         <h2>Hello,</h2>
-        <h1>I am { fName },</h1>
+        <h1>I am { fName } from Nigeria,</h1>
         <h2></h2>
         <p>
                     
