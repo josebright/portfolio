@@ -17,12 +17,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className='grid grid-cols-2 m-0 w-screen h-screen fixed'>
-          <div className='h-screen bg-[#8E347E]'></div>
-          <div className='h-screen bg-[#191919]'></div>
+        <div className='bg-gradient-to-r from-[#C12F5C] via-[#4161A7] to-[#1A1D20] m-0 w-screen h-screen fixed'>
         </div>
-        <div className='relative w-36 top-3 ml-[3%] bg-[#1A1D20] text-[#DEE1E4] rounded-t-lg text-center'>Bright&apos;s Portfolio</div>
-        <div className='relative w-[98%] h-[95vh] mx-auto top-3 bg-[#1A1D20] text-[#DEE1E4] rounded-md overflow-y-auto'>
+        <div className='relative w-36 top-3 ml-[2%] bg-[#1A1D20] text-[#DEE1E4] font-bold rounded-t-lg text-center'>Bright&apos;s Portfolio</div>
+        <div className='relative w-[98%] h-[95vh] mx-auto top-3 bg-[#1A1D20] text-[#DEE1E4] rounded-l-lg overflow-y-scroll scrollbar'>
           <About />
         </div>
       </main>

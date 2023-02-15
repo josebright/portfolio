@@ -16,7 +16,7 @@ export default function About() {
 
         </p>
         <p>
-          I enjoy continuous personal development.
+          Talks about #microservices, #clouddeployment, #agilemethodology, #softwarearchitecture, and #requirementsengineering
         </p>
       </div>
       <div>
