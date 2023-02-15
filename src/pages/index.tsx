@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
 import About from './about';
+import NavBar from '@/components/navbar';
 
 
 
@@ -21,6 +22,7 @@ export default function Home() {
         </div>
         <div className='relative w-36 top-3 ml-[2%] bg-[#1A1D20] text-[#DEE1E4] font-bold rounded-t-lg text-center'>Bright&apos;s Portfolio</div>
         <div className='relative w-[98%] h-[95vh] mx-auto top-3 bg-[#1A1D20] text-[#DEE1E4] rounded-l-lg overflow-y-scroll scrollbar'>
+          <NavBar />
           <About />
         </div>
       </main>
