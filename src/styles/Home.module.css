@@ -1,4 +1,3 @@
-.gg{
-  background: rgba(var(--card-rgb), 0);
-  transition: background 200ms, border 200ms;
+.main {
+  font-style: montserrat;
 }

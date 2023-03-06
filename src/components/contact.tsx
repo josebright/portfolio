@@ -7,7 +7,7 @@ import Github from 'public/assests/svg/github.svg'
 export default function Contact() {
   return (
     <div className='flex mt-10'>
-      <div className='bg-gradient-to-r from-[#C12F5C] to-[#4161A7] rounded-full p-0.5'>
+      <div className='bg-gradient-to-r from-[#C12F5C] to-[#4161A7] rounded-full p-0.5 cursor-pointer'>
         <Image
           src={Email}
           alt="email"
@@ -15,7 +15,7 @@ export default function Contact() {
           height={30}
         />
       </div>
-      <div className='bg-gradient-to-r from-[#C12F5C] to-[#4161A7] rounded-full p-0.5'>
+      <div className='bg-gradient-to-r from-[#C12F5C] to-[#4161A7] rounded-full p-0.5 cursor-pointer'>
         <Image
           src={Linkedin}
           alt="linkedin"
@@ -23,7 +23,7 @@ export default function Contact() {
           height={30}
         />
       </div>
-      <div className='bg-gradient-to-r from-[#C12F5C] to-[#4161A7] rounded-full p-0.5'>
+      <div className='bg-gradient-to-r from-[#C12F5C] to-[#4161A7] rounded-full p-0.5 cursor-pointer'>
         <Image
           src={Twitter}
           alt="twitter"
@@ -31,7 +31,7 @@ export default function Contact() {
           height={30}
         />
       </div>
-      <div className='bg-gradient-to-r from-[#C12F5C] to-[#4161A7] rounded-full p-0.5'>
+      <div className='bg-gradient-to-r from-[#C12F5C] to-[#4161A7] rounded-full p-0.5 cursor-pointer'>
         <Image
           src={Github}
           alt="github"
