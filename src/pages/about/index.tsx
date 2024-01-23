@@ -9,8 +9,8 @@ export default function About() {
   return (
     <div id='about' className='flex flex-col md:flex-row h-screen px-4 md:px-20 items-center space-y-6 md:space-y-0 md:space-x-10'>
       <div className='m-auto md:w-7/12 space-y-4'>
-        <h2>Hello,</h2>
-        <h1>I am <a href={linkedInUrl} target="_blank" rel="noopener noreferrer" className="hover:text-blue-600">{fName}</a> from <a href={nigeriaMapUrl} target="_blank" rel="noopener noreferrer" className="hover:text-green-600">Nigeria</a>,</h1>
+        <h2>Hello 👋🏽,</h2>
+        <h1>I am <a href={linkedInUrl} target="_blank" rel="noopener noreferrer" className="text-purple-300 hover:text-purple-600">{fName}</a> from <a href={nigeriaMapUrl} target="_blank" rel="noopener noreferrer" className="text-green-300 hover:text-green-600">Nigeria</a>,</h1>
         <p>
           A highly motivated and enthusiastic graduate with a BSc in Mathematics and an MSc in Software Engineering. Possessing over three years of experience in the field of software engineering.
           I love to solve problems, and I am keen on improving my abilities and acquiring knowledge in the applications of mathematics and problem-solving techniques in technological engineering.
