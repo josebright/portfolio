@@ -8,20 +8,34 @@ import TextField from '@mui/material/TextField';
 import { styled } from '@mui/material/styles';
 
 type SubmitState = 'idle' | 'submitting' | 'success' | 'error';
+type FieldName = 'name' | 'email' | 'message';
+type FieldErrors = Partial<Record<FieldName, string>>;
 
 const Form = styled('form')({ width: '100%', maxWidth: 640 });
 
 export function ContactForm() {
   const [state, setState] = useState<SubmitState>('idle');
   const [errorMessage, setErrorMessage] = useState<string>('');
+  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+
+  function clearFieldError(name: FieldName) {
+    setFieldErrors((prev) => {
+      if (!(name in prev)) return prev;
+      const next = { ...prev };
+      delete next[name];
+      return next;
+    });
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formElement = event.currentTarget;
     setState('submitting');
     setErrorMessage('');
+    setFieldErrors({});
     const result = await postContact(new FormData(formElement));
     if (!result.ok) {
+      if (result.fields) setFieldErrors(result.fields);
       setErrorMessage(result.message);
       setState('error');
       return;
@@ -39,8 +53,20 @@ export function ContactForm() {
           required
           fullWidth
           inputProps={{ minLength: 2, maxLength: 80 }}
+          error={Boolean(fieldErrors.name)}
+          helperText={fieldErrors.name}
+          onChange={() => clearFieldError('name')}
         />
-        <TextField name="email" label="Your email" type="email" required fullWidth />
+        <TextField
+          name="email"
+          label="Your email"
+          type="email"
+          required
+          fullWidth
+          error={Boolean(fieldErrors.email)}
+          helperText={fieldErrors.email}
+          onChange={() => clearFieldError('email')}
+        />
         <TextField
           name="message"
           label="What's on your mind?"
@@ -49,6 +75,9 @@ export function ContactForm() {
           multiline
           minRows={5}
           inputProps={{ minLength: 10, maxLength: 2000 }}
+          error={Boolean(fieldErrors.message)}
+          helperText={fieldErrors.message}
+          onChange={() => clearFieldError('message')}
         />
         <input type="text" name="website" tabIndex={-1} autoComplete="off" hidden aria-hidden />
         <SubmitFeedback state={state} errorMessage={errorMessage} />
@@ -85,6 +114,7 @@ function SubmitFeedback({ state, errorMessage }: FeedbackProps) {
 interface SubmitResult {
   readonly ok: boolean;
   readonly message: string;
+  readonly fields?: FieldErrors;
 }
 
 async function postContact(formData: FormData): Promise<SubmitResult> {
@@ -96,7 +126,11 @@ async function postContact(formData: FormData): Promise<SubmitResult> {
     });
     if (!response.ok) {
       const detail = await response.json().catch(() => ({}));
-      return { ok: false, message: detail.error ?? 'Server rejected the message.' };
+      return {
+        ok: false,
+        message: detail.error ?? 'Server rejected the message.',
+        fields: detail.fields,
+      };
     }
     return { ok: true, message: 'sent' };
   } catch {

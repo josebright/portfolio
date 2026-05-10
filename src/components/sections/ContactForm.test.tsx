@@ -57,4 +57,19 @@ describe('ContactForm', () => {
     await user.click(screen.getByRole('button', { name: /send message/i }));
     expect(await screen.findByText(/network error/i)).toBeInTheDocument();
   });
+
+  it('renders per-field errors returned from the server', async () => {
+    fetchMock.mockResolvedValueOnce({
+      ok: false,
+      json: async () => ({
+        error: 'Please fix the highlighted fields.',
+        fields: { message: 'Message must be at least 10 characters.' },
+      }),
+    } as Response);
+    const user = userEvent.setup();
+    renderForm();
+    await fillValidForm(user);
+    await user.click(screen.getByRole('button', { name: /send message/i }));
+    expect(await screen.findByText(/message must be at least 10 characters/i)).toBeInTheDocument();
+  });
 });

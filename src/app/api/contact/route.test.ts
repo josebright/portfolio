@@ -33,11 +33,15 @@ describe('POST /api/contact', () => {
     expect(response.status).toBe(400);
   });
 
-  it('returns 400 when payload fails validation', async () => {
+  it('returns 400 with per-field error messages when payload fails validation', async () => {
     const response = await POST(
       buildRequest({ name: 'a', email: 'bad', message: 'short' }) as never,
     );
     expect(response.status).toBe(400);
+    const body = (await response.json()) as { error: string; fields: Record<string, string> };
+    expect(body.fields.name).toMatch(/at least 2 characters/i);
+    expect(body.fields.email).toMatch(/valid email/i);
+    expect(body.fields.message).toMatch(/at least 10 characters/i);
   });
 
   it('silently accepts honeypot-filled submissions without sending email', async () => {

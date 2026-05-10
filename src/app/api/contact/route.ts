@@ -4,9 +4,15 @@ import { rateLimit } from '@/lib/rate-limit';
 import { reportError } from '@/lib/observability';
 
 const ContactPayload = z.object({
-  name: z.string().min(2).max(80),
-  email: z.string().email(),
-  message: z.string().min(10).max(2000),
+  name: z
+    .string()
+    .min(2, 'Please enter your name (at least 2 characters).')
+    .max(80, 'Name must be 80 characters or fewer.'),
+  email: z.string().email('Please enter a valid email address.'),
+  message: z
+    .string()
+    .min(10, 'Message must be at least 10 characters.')
+    .max(2000, 'Message must be 2000 characters or fewer.'),
   website: z.string().optional(),
 });
 
@@ -21,13 +27,27 @@ export async function POST(request: NextRequest) {
   }
   const parsed = ContactPayload.safeParse(json);
   if (!parsed.success) {
-    return NextResponse.json({ error: 'Invalid form data.' }, { status: 400 });
+    return NextResponse.json(
+      { error: 'Please fix the highlighted fields.', fields: firstErrorPerField(parsed.error) },
+      { status: 400 },
+    );
   }
   if (parsed.data.website) {
     return NextResponse.json({ ok: true });
   }
   await deliverMessage(parsed.data);
   return NextResponse.json({ ok: true });
+}
+
+function firstErrorPerField(error: z.ZodError): Record<string, string> {
+  const fields: Record<string, string> = {};
+  for (const issue of error.issues) {
+    const key = issue.path[0];
+    if (typeof key === 'string' && !(key in fields)) {
+      fields[key] = issue.message;
+    }
+  }
+  return fields;
 }
 
 function tooManyRequests(resetAt: number) {
