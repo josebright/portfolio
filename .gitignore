@@ -52,3 +52,6 @@ next-env.d.ts
 
 # os
 Thumbs.db
+
+# design assets (large mockups, not needed in repo)
+/docs/design/
