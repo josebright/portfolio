@@ -1,0 +1,33 @@
+When TechVenia asked me to migrate SciVenia and Mubazar to AWS, the brief was simple: "make it more reliable, ship faster, don't break anything." The brief was simple. The work was not.
+
+Here is what I would tell myself if I started over.
+
+## Treat the pipeline as the product
+
+The first instinct is to wire up CI/CD just well enough that builds pass and deploys happen. That is a trap. Every minute spent on the pipeline pays back tenfold in operator hours saved.
+
+I rewrote the GitLab CI from scratch with four jobs: lint → test → build → deploy. Each runs in isolation, fails fast, and produces a versioned image tag. Rollback is `redeploy --tag previous`. That single capability — the rollback button you trust — paid for the whole migration.
+
+## Secrets do not belong in the repo
+
+The first hour of the migration was moving every credential out of `.env` files into AWS Secrets Manager. The code reads from a single `getSecret` adapter. Six months later when we needed to rotate the Stripe keys, it took 90 seconds.
+
+The lesson: refactoring secrets out **later** costs more than doing it on day one. There is no later.
+
+## The dashboard ships with the deploy
+
+Every deployment now creates its own CloudWatch dashboard linked from Slack. Engineers see exactly what they shipped, what regressed, and what stayed flat. Mean time to detect a regression dropped from "next morning" to "next 15 minutes".
+
+The rule I would put on the wall: a deploy without observability is a guess.
+
+## What I would change
+
+I optimized too early on a few things — multi-region failover before we had multi-region traffic, Redis cluster mode before we needed it. The quote that fits: _"Premature optimization is the root of all evil."_ Knuth was right then; he is still right now.
+
+If I started today, I would defer those decisions until the first real incident demanded them. Optionality is cheap; complexity is not.
+
+## Closing
+
+You do not need a platform team to ship reliably. You need a small set of disciplined choices: the pipeline you trust, secrets you can rotate, dashboards you can read, and the courage to defer everything you cannot justify yet.
+
+That is most of what I learned. The rest is muscle memory built in production.

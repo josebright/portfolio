@@ -1,38 +1,81 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Bright8 Portfolio
 
-## Getting Started
+Personal portfolio of **Uchenna Bright Ugwumadu** — Cloud Software Engineer | Full-Stack Developer.
 
-First, run the development server:
+> _Build. Bright. Beyond._
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+## Stack
+
+- **Next.js 15** (App Router, RSC, Turbopack)
+- **React 19** + **TypeScript 5** (strict, `noUncheckedIndexedAccess`)
+- **MUI 6** + **Emotion** (`styled()` API, theme-driven)
+- **Sora** (display) + **Inter** (body) via `next/font`
+- **Vitest** + **React Testing Library**
+- **ESLint 9** (flat config) + **Prettier 3**
+- **Husky** + **lint-staged**
+
+## Architecture
+
+Domain-named folders following Screaming Architecture (see `docs/engineering-guidelines.md`):
+
+```text
+src/
+  app/                  # App Router routes
+    about/  projects/  experience/  contact/  api/contact/
+  components/
+    ui/                 # primitives (Logo, Section, SectionHeading)
+    layout/             # NavBar, Footer
+    sections/           # Hero, AboutPanels, ProjectGrid, ExperienceTimeline, SkillsCloud, ContactForm
+  content/              # typed profile, projects, experience, skills
+  lib/                  # theme, fonts, site constants
+public/
+  assets/               # images, svg, profile photo
+  cv/                   # downloadable resume
+docs/
+  engineering-guidelines.md
+  design/               # Figma exports (Bright8 brand presentation)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Engineering guidelines** are in [`docs/engineering-guidelines.md`](docs/engineering-guidelines.md). Hard rules (function ≤20 lines, file ≤500 lines, no nulls, SOLID, no comment smells, FIRST tests, Dependency Rule) are enforced by review.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Getting started
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Requires Node ≥ 20 (see `.nvmrc`).
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+nvm use
+npm install
+cp .env.example .env.local   # fill in CONTACT_TO_EMAIL etc. if wiring email
+npm run dev                  # http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Scripts
 
-## Learn More
+| Command                 | What it does                 |
+| ----------------------- | ---------------------------- |
+| `npm run dev`           | Start dev server (Turbopack) |
+| `npm run build`         | Production build             |
+| `npm run start`         | Run the production build     |
+| `npm run lint`          | ESLint                       |
+| `npm run typecheck`     | `tsc --noEmit`               |
+| `npm test`              | Vitest run                   |
+| `npm run test:watch`    | Vitest watch                 |
+| `npm run test:coverage` | Vitest with coverage         |
+| `npm run format`        | Prettier write               |
+| `npm run verify`        | typecheck + lint + test      |
 
-To learn more about Next.js, take a look at the following resources:
+## Contact form
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Set the env vars in `.env.local` to wire the contact form to **Resend**:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```env
+CONTACT_FROM_EMAIL=hello@bright8.dev
+CONTACT_TO_EMAIL=uchennaugwumadu8@gmail.com
+RESEND_API_KEY=re_xxx
+```
 
-## Deploy on Vercel
+Without these, submissions validate but no email is sent (logged for inspection in dev).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deploy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Vercel (recommended). Set `NEXT_PUBLIC_SITE_URL` and the contact env vars in the project's environment configuration.

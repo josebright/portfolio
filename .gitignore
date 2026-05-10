@@ -34,3 +34,21 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# coverage
+/coverage
+
+# playwright
+/playwright-report
+/test-results
+/playwright/.cache
+
+# lighthouse
+/.lighthouseci
+
+# editor
+.idea/
+.vscode/
+
+# os
+Thumbs.db
