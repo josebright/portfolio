@@ -49,6 +49,7 @@ next-env.d.ts
 # editor
 .idea/
 .vscode/
+.claude/
 
 # os
 Thumbs.db

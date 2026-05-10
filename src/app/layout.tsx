@@ -10,7 +10,6 @@ import { SITE } from '@/lib/site';
 import { NavBar } from '@/components/layout/NavBar';
 import { Footer } from '@/components/layout/Footer';
 import { PersonJsonLd } from '@/components/seo/PersonJsonLd';
-import { WebVitals } from '@/components/observability/WebVitals';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -47,7 +46,6 @@ export default function RootLayout({ children }: { readonly children: React.Reac
           Skip to content
         </a>
         <PersonJsonLd />
-        <WebVitals />
         <InitColorSchemeScript attribute="class" />
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme} defaultMode="system">
