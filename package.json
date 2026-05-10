@@ -6,7 +6,7 @@
   "author": "Uchenna Bright Ugwumadu <uchennaugwumadu8@gmail.com>",
   "license": "UNLICENSED",
   "engines": {
-    "node": ">=20.11.0"
+    "node": ">=22.0.0"
   },
   "scripts": {
     "dev": "next dev",
