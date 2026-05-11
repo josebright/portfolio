@@ -10,15 +10,19 @@ export const profile = {
   panels: [
     {
       title: 'Who Is Bright?',
-      body: 'Bright is a software engineer, tech mentor, and digital growth strategist passionate about helping people and businesses use technology purposefully. He blends technical excellence with a people-first approach — simplifying tech for impact.',
-    },
-    {
-      title: 'How Do I Lead?',
-      body: 'By leading with clarity, empathy, and innovation. Teaching others to understand not just how to build tech, but why. I build teams that think like problem solvers, not just coders.',
+      body: 'Bright is a software engineer, tech mentor, and digital growth strategist passionate about helping people and businesses use technology purposefully. He blends technical excellence with a people-first approach, simplifying tech for impact.',
     },
     {
       title: 'What Can I Do?',
       body: 'I support three groups: I mentor young IT enthusiasts to launch strong careers via real-world projects; I provide startups and small businesses with affordable, smart websites and automation to boost their online sales; and I implement automation tools for organizations to streamline processes.',
+    },
+    {
+      title: 'What Sets Me Apart?',
+      body: 'A rare mix of technical depth and business sense. I write code that drives real outcomes. Proven ability to mentor, strategize, and deliver. From community-building to scalable software. Every project aligns with measurable impact and growth.',
+    },
+    {
+      title: 'How Do I Lead?',
+      body: 'By leading with clarity, empathy, and innovation. Teaching others to understand not just how to build tech, but why. I build teams that think like problem solvers, not just coders.',
     },
     {
       title: 'What Is My Aim?',
@@ -27,10 +31,6 @@ export const profile = {
     {
       title: 'What Do I Stand For?',
       body: 'Empowerment through knowledge. Accessibility in technology. Integrity in execution. I stand for helping others rise by making technology human, useful, and sustainable.',
-    },
-    {
-      title: 'What Sets Me Apart?',
-      body: 'A rare mix of technical depth and business sense — I write code that drives real outcomes. Proven ability to mentor, strategize, and deliver — from community-building to scalable software. Every project aligns with measurable impact and growth.',
     },
   ],
   social: [

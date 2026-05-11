@@ -17,7 +17,7 @@ export default function AboutPage() {
         <SectionHeading
           eyebrow="About"
           title="The Bright8 brand — clarity, strength, and sophistication."
-          description="Six questions that capture who I am, how I lead, what I do, and what I stand for."
+          description="Six questions that capture who I am, what I do, how I lead, and what I stand for."
         />
         <AboutPanels />
       </Section>

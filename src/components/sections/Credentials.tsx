@@ -1,5 +1,6 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
@@ -13,14 +14,14 @@ import {
 } from '@/content/credentials';
 import { RevealOnScroll } from '@/components/ui/RevealOnScroll';
 
-const Grid = styled(Box)(({ theme }) => ({
+const ItemsGrid = styled(Box)(({ theme }) => ({
   display: 'grid',
-  gap: theme.spacing(8),
-  gridTemplateColumns: 'repeat(1, 1fr)',
+  gap: `${theme.spacing(5)} ${theme.spacing(6)}`,
+  gridTemplateColumns: '1fr',
   [theme.breakpoints.up('md')]: { gridTemplateColumns: '1fr 1fr' },
 }));
 
-const ColumnTitle = styled(Typography)({
+const GroupHeading = styled(Typography)({
   fontFamily: 'var(--font-sora), sans-serif',
   fontWeight: 700,
   fontSize: '1rem',
@@ -30,52 +31,69 @@ const ColumnTitle = styled(Typography)({
 
 export function Credentials() {
   return (
-    <Grid>
-      <RevealOnScroll>
-        <EducationColumn />
-      </RevealOnScroll>
-      <RevealOnScroll delayMs={80}>
-        <CertificationsColumn />
-      </RevealOnScroll>
-    </Grid>
-  );
-}
-
-function EducationColumn() {
-  return (
-    <Stack spacing={4}>
-      <ColumnTitle>Education</ColumnTitle>
-      <Stack spacing={4} divider={<Hairline />}>
-        {education.map((entry) => (
-          <EducationItem key={`${entry.institution}-${entry.period}`} entry={entry} />
+    <Stack spacing={{ xs: 8, md: 10 }}>
+      <CredentialGroup title="Education">
+        {education.map((entry, index) => (
+          <GridSlot
+            key={`${entry.institution}-${entry.period}`}
+            span={shouldSpanFullWidth(index, education.length)}
+            delayMs={index * 60}
+          >
+            <EducationCard entry={entry} />
+          </GridSlot>
         ))}
-      </Stack>
+      </CredentialGroup>
+      <CredentialGroup title="Certifications">
+        {certifications.map((entry, index) => (
+          <GridSlot
+            key={`${entry.issuer}-${entry.title}`}
+            span={shouldSpanFullWidth(index, certifications.length)}
+            delayMs={index * 60}
+          >
+            <CertificationCard entry={entry} />
+          </GridSlot>
+        ))}
+      </CredentialGroup>
     </Stack>
   );
 }
 
-function CertificationsColumn() {
+function CredentialGroup({
+  title,
+  children,
+}: {
+  readonly title: string;
+  readonly children: ReactNode;
+}) {
   return (
     <Stack spacing={4}>
-      <ColumnTitle>Certifications</ColumnTitle>
-      <Stack spacing={4} divider={<Hairline />}>
-        {certifications.map((entry) => (
-          <CertificationItem key={`${entry.issuer}-${entry.title}`} entry={entry} />
-        ))}
-      </Stack>
+      <GroupHeading>{title}</GroupHeading>
+      <ItemsGrid>{children}</ItemsGrid>
     </Stack>
   );
 }
 
-const Hairline = styled('hr')(({ theme }) => ({
-  border: 0,
-  borderTop: `1px solid ${theme.palette.divider}`,
-  margin: 0,
-}));
+interface GridSlotProps {
+  readonly span: boolean;
+  readonly delayMs: number;
+  readonly children: ReactNode;
+}
 
-function EducationItem({ entry }: { readonly entry: EducationEntry }) {
+function GridSlot({ span, delayMs, children }: GridSlotProps) {
   return (
-    <Stack spacing={0.75}>
+    <Box sx={{ gridColumn: { xs: 'auto', md: span ? '1 / -1' : 'auto' } }}>
+      <RevealOnScroll delayMs={delayMs}>{children}</RevealOnScroll>
+    </Box>
+  );
+}
+
+function shouldSpanFullWidth(index: number, total: number): boolean {
+  return total % 2 === 1 && index === total - 1;
+}
+
+function EducationCard({ entry }: { readonly entry: EducationEntry }) {
+  return (
+    <Stack spacing={1}>
       <Typography variant="h4" component="h3">
         {entry.degree}
       </Typography>
@@ -89,9 +107,9 @@ function EducationItem({ entry }: { readonly entry: EducationEntry }) {
   );
 }
 
-function CertificationItem({ entry }: { readonly entry: CertificationEntry }) {
+function CertificationCard({ entry }: { readonly entry: CertificationEntry }) {
   return (
-    <Stack spacing={0.75}>
+    <Stack spacing={1}>
       <Typography variant="h4" component="h3">
         {entry.title}
       </Typography>
@@ -106,7 +124,7 @@ function CertificationItem({ entry }: { readonly entry: CertificationEntry }) {
           href={entry.verifyUrl}
           target="_blank"
           rel="noopener"
-          sx={{ fontSize: '0.875rem', fontWeight: 600 }}
+          sx={{ fontSize: '0.875rem', fontWeight: 600, alignSelf: 'flex-start', mt: 0.5 }}
         >
           Verify →
         </Link>
