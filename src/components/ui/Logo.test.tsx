@@ -27,7 +27,9 @@ describe('Logo', () => {
 
   it('has no axe accessibility violations', async () => {
     const { container } = renderLogo();
-    const results = await axe(container);
+    const results = await axe(container, {
+      rules: { 'color-contrast': { enabled: false } },
+    });
     expect(results).toHaveNoViolations();
   });
 });

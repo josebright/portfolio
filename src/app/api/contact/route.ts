@@ -78,12 +78,17 @@ interface ContactMessage {
   readonly message: string;
 }
 
+function warnMissingEmailConfig(name: string): void {
+  if (process.env.NODE_ENV === 'test') return;
+  console.warn('Contact form: email env vars missing — skipping send.', { name });
+}
+
 async function deliverMessage(payload: ContactMessage): Promise<void> {
   const apiKey = process.env.RESEND_API_KEY;
   const toAddress = process.env.CONTACT_TO_EMAIL;
   const fromAddress = process.env.CONTACT_FROM_EMAIL;
   if (!apiKey || !toAddress || !fromAddress) {
-    console.warn('Contact form: email env vars missing — skipping send.', { name: payload.name });
+    warnMissingEmailConfig(payload.name);
     return;
   }
   try {
